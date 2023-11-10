@@ -1,0 +1,94 @@
+#root {
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: 2rem;
+  text-align: center;
+}
+
+.playbutton {
+  width: 0;
+  height: 0;
+  border-top: 18px solid transparent;
+  border-left: 36px solid red;
+  border-bottom: 18px solid transparent;
+  border-right: transparent;
+  background-color: transparent;
+  margin-left: 20px;
+}
+
+
+
+.alignment {
+  width: 65px
+}
+
+.sequencer-row {
+  display: grid;
+  gap: 20px;
+  justify-content: center;
+  grid-template-columns: repeat(9, 1fr);
+  align-items: center;
+}
+
+.sequencer-row-id {
+  font-family: papyrus;
+}
+
+.synthBoard {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  border: 5px black solid;
+  padding: 10px;
+  background-color: beige;
+  border-radius: 20px;
+  max-width: 800px;
+  padding-right: 20px;
+
+}
+
+.indicator-row {
+  display: grid;
+  gap: 20px;
+  justify-content: center;
+  grid-template-columns: repeat(9, 1fr);
+
+}
+
+.indicator {
+  background-color: black;
+  border-radius: 50px;
+  width: 13px;
+  height: 13px;
+  margin: 0 auto;
+  border: 1px solid black;
+}
+
+.step {
+  width: 60px;
+  height: 60px;
+  border-radius: 5px;
+  border: 5px solid black;
+  margin: 0 auto;
+
+}
+
+.step.on {
+  background-color: green;
+}
+
+.step.off {
+  background-color: rgb(72, 72, 72);
+}
+
+.indicator.on {
+  background-color: coral;
+}
+
+.playbutton.playing {
+  border-left-color: green;
+}
+
+.playbutton.paused {
+  border-left-color: black
+}
