@@ -3,7 +3,7 @@ import './App.css'
 import clapsound from './clap.wav'
 import kicksound from './kick.wav'
 import woopsound from './woop.wav'
-import hihatsound from './hihat.wav'
+import hihatsound from './Hihat.wav'
 
 
 function Step({ value, stepToggle }) {
