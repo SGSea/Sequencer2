@@ -4,6 +4,7 @@ import clapsound from './clap.wav'
 import kicksound from './kick.wav'
 import woopsound from './woop.wav'
 import hihatsound from './Hihat.wav'
+import Keyboard from './keyboard'
 
 
 function Step({ value, stepToggle }) {
@@ -28,6 +29,8 @@ function Indicator({ isOn }) {
     <div className={`indicator ${isOn ? 'on' : 'off'}`}></div>
   )
 }
+
+
 
 const Clap = new Audio(clapsound)
 const Kick = new Audio(kicksound)
@@ -107,27 +110,30 @@ export default function Sequencer() {
 
         <div className='indicator-row'>
           <div></div>
-          {Array.from({ length: 8 }, (_, i) => <Indicator isOn={currentStepIndex === (i + 1) % 8} />)}
+          {Array.from({ length: 8 }, (_, i) => <Indicator key={i} isOn={currentStepIndex === (i + 1) % 8} />)}
 
         </div>
         <div className='sequencer-row'>
           <div className='sequencer-row-id'>clap</div>
-          {Array.from({ length: 8 }, (_, i) => <Step value={steps[i]} stepToggle={() => handleToggle(i, steps, setSteps)} />)}
+          {Array.from({ length: 8 }, (_, i) => <Step key={i} value={steps[i]} stepToggle={() => handleToggle(i, steps, setSteps)} />)}
 
         </div>
         <div className='sequencer-row'>
           <div className='sequencer-row-id'>kick</div>
-          {Array.from({ length: 8 }, (_, i) => <Step value={steps2[i]} stepToggle={() => handleToggle(i, steps2, setSteps2)} />)}
+          {Array.from({ length: 8 }, (_, i) => <Step key={i} value={steps2[i]} stepToggle={() => handleToggle(i, steps2, setSteps2)} />)}
         </div>
         <div className='sequencer-row'>
           <div className='sequencer-row-id'>woop</div>
-          {Array.from({ length: 8 }, (_, i) => <Step value={steps3[i]} stepToggle={() => handleToggle(i, steps3, setSteps3)} />)}
+          {Array.from({ length: 8 }, (_, i) => <Step key={i} value={steps3[i]} stepToggle={() => handleToggle(i, steps3, setSteps3)} />)}
         </div>
         <div className='sequencer-row'>
           <div className='sequencer-row-id'>hihat</div>
-          {Array.from({ length: 8 }, (_, i) => <Step value={steps4[i]} stepToggle={() => handleToggle(i, steps4, setSteps4)} />)}
+          {Array.from({ length: 8 }, (_, i) => <Step key={i} value={steps4[i]} stepToggle={() => handleToggle(i, steps4, setSteps4)} />)}
         </div>
         <div className='sequencer-row'></div>
+        <div className='keyboard-row'>
+          <Keyboard />
+        </div>
       </div>
 
     </>
