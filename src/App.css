@@ -92,3 +92,9 @@
 .playbutton.paused {
   border-left-color: black
 }
+
+.topRow {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+}

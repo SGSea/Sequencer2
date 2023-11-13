@@ -42,8 +42,8 @@ export default function Sequencer() {
   const [steps2, setSteps2] = useState(Array(8).fill('off'));
   const [steps3, setSteps3] = useState(Array(8).fill('off'));
   const [steps4, setSteps4] = useState(Array(8).fill('off'));
-
-
+  const [tempo, setTempo] = useState(85);
+  const bpmConverted = (60000 / tempo) / 2;
 
   useEffect(() => {
     if (!playState) { return }
@@ -71,9 +71,9 @@ export default function Sequencer() {
         }
         return (currentStepIndex + 1) % 8
       })
-    }, 300);
+    }, bpmConverted);
     return () => clearInterval(interval);
-  }, [playState, steps, steps2, steps3, steps4]);
+  }, [playState, steps, steps2, steps3, steps4, bpmConverted]);
 
 
   function handlePlay() {
@@ -94,11 +94,17 @@ export default function Sequencer() {
     setSteps(stepStates)
   }
 
-
+  console.log(tempo)
   return (
     <>
       <div className='synthBoard'>
-        <Play togglePlay={handlePlay} playState={playState} />
+
+        <div className='topRow'>
+          <Play togglePlay={handlePlay} playState={playState} />
+          <input value={tempo} onChange={e => setTempo(e.target.value)} type='range' id='tempo' name='tempo' min='30' max='250' />
+          <label for='tempo'>{tempo}</label>
+        </div>
+
         <div className='indicator-row'>
           <div></div>
           {Array.from({ length: 8 }, (_, i) => <Indicator isOn={currentStepIndex === (i + 1) % 8} />)}
