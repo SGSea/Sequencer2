@@ -101,8 +101,8 @@ export default function Sequencer() {
 
         <div className='topRow'>
           <Play togglePlay={handlePlay} playState={playState} />
-          <input value={tempo} onChange={e => setTempo(e.target.value)} type='range' id='tempo' name='tempo' min='30' max='250' />
-          <label for='tempo'>{tempo}</label>
+          <input value={tempo} onChange={e => setTempo(parseInt(e.target.value))} type='range' id='tempo' name='tempo' min='30' max='250' />
+          <label htmlFor='tempo'>{tempo}</label>
         </div>
 
         <div className='indicator-row'>
