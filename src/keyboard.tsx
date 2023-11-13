@@ -1,3 +1,5 @@
+import { useEffect, useState } from "react";
+
 const audioCtx = new AudioContext();
 const c4 = 261.63;
 const d4 = 293.66;
@@ -8,6 +10,7 @@ const a4 = 440;
 const b4 = 493.88;
 const c5 = 523.25;
 
+const keyStateHandlers = {};
 const oscillators = {};
 const keyDown = {};
 const notes = [{
@@ -42,7 +45,10 @@ function handleKeyDown(keyEvent: KeyboardEvent) {
         PlayNote(noteFound.pitch, keyEvent.key)
         keyDown[keyEvent.key] = true;
         console.log('key down');
+        keyStateHandlers[noteFound.letter](true);
     };
+
+
 }
 
 function handleKeyUp(keyEvent: KeyboardEvent) {
@@ -51,6 +57,7 @@ function handleKeyUp(keyEvent: KeyboardEvent) {
         StopPlay(keyEvent.key)
         console.log('key up');
         keyDown[keyEvent.key] = false;
+        keyStateHandlers[noteFound.letter](false);
     };
 }
 
@@ -58,7 +65,7 @@ function PlayNote(noteToPlay, keyboardInput) {
     const oscillatorNode = audioCtx.createOscillator();
     oscillators[keyboardInput] = oscillatorNode;
     oscillatorNode.connect(audioCtx.destination);
-    oscillatorNode.type = "triangle";
+    oscillatorNode.type = "sine";
     oscillatorNode.frequency.setValueAtTime(noteToPlay, audioCtx.currentTime);
     oscillatorNode.start();
 }
@@ -70,8 +77,13 @@ function StopPlay(keyboardInput) {
 
 function Key({ note }) {
 
+    const [pressed, setPressed] = useState(false)
+    useEffect(() => {
+        keyStateHandlers[note.letter] = setPressed;
+    })
+
     return (
-        <button className="keyboard-key">{note.name}</button>
+        <button className={`keyboard-key ${pressed ? 'keyboard-key-pressed' : ''}`}>{note.name}({note.letter})</button>
     )
 }
 
