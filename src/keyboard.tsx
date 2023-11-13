@@ -1,5 +1,3 @@
-import { useEffect, useRef } from "react";
-
 const audioCtx = new AudioContext();
 const c4 = 261.63;
 const d4 = 293.66;
